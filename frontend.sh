@@ -1,0 +1,1 @@
+echo -e "\e[COL31m installing the nginx \e[0m"
