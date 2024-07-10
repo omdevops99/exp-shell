@@ -7,8 +7,8 @@ dnf module disable nodejs -y  &>>$log_file
 
 echo $?
 
-echo -e "${color} disable nodejs \e[0m"
- enable nodejs \e[0m"
+echo -e "${color} enable nodejs \e[0m"
+ 
 dnf module enable nodejs:18 -y  &>>$log_file
 
 echo $?
