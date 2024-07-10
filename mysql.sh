@@ -1,4 +1,4 @@
-log_file=/tmp/expense/log
+log_file=/tmp/expense.log
 color="\e[33m"
 
 echo -e "${color} disable mysql \e[0m"
