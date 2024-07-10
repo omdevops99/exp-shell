@@ -1,5 +1,5 @@
 log_file=&>>/tmp/expense.log
-color=\e[32m
+color="\e[32m"
 
 echo -e "${color} installing the nginx \e[0m" 
 
@@ -13,7 +13,7 @@ echo $?
 
 echo -e "${color} removing the file \e[0m"
 
-rm -rf /usr/share/nginx/html/*  &>>$log_file
+rm -rf /usr/share/nginx/html/* &>>$log_file
 echo $?
 
 echo -e "${color} removing the file \e[0m"
@@ -23,7 +23,7 @@ echo $?
 
 echo -e "${color} changing the directory \e[0m"
 
-cd /usr/share/nginx/html  &>>$log_file
+cd /usr/share/nginx/html &>>$log_file
 echo $?
 
 echo -e "${color} unzip the file \e[0m"
