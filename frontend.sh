@@ -1,5 +1,5 @@
-log_file = &>>/tmp/expense.log
-color = \e[32m
+log_file=&>>/tmp/expense.log
+color=\e[32m
 
 echo -e "${color} installing the nginx \e[0m" 
 
