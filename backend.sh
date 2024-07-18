@@ -82,22 +82,14 @@ else
   echo -e "\e[31m FAILURE \e[0m"  
 fi
 
-echo -e "${color}changing the directory & Unzip the file \e[0m"
-
+echo -e "${color} Extract the application content \e[0m"
 cd /app &>>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "\e[32m SUCCESS \e[0m"
-else
-  echo -e "\e[31m FAILURE \e[0m"  
-fi
-
 unzip /tmp/backend.zip &>>log_file
 if [ $? -eq 0 ]; then
   echo -e "\e[32m SUCCESS \e[0m"
 else
   echo -e "\e[31m FAILURE \e[0m"  
 fi
-
 
 echo -e "${color} changing the directory and install the dependency \e[0m"
 
@@ -110,22 +102,12 @@ fi
 
 echo -e "${color} starting the backend services \e[0m"
 systemctl daemon-reload &>>$log_file  
-if [ $? -eq 0 ]; then
-  echo -e "\e[32m SUCCESS \e[0m"
-else
-  echo -e "\e[31m FAILURE \e[0m"  
-fi
-
 systemctl enable backend &>>log_file
+systemctl start backend &>>log_file
+
 if [ $? -eq 0 ]; then
   echo -e "\e[32m SUCCESS \e[0m"
 else
   echo -e "\e[31m FAILURE \e[0m"  
 fi
 
-systemctl start backend &>>log_file
-if [ $? -eq 0 ]; then
-  echo -e "\e[32m SUCCESS \e[0m"
-else
-  echo -e "\e[31m FAILURE \e[0m"  
-fi
