@@ -56,11 +56,16 @@ else
 fi
 
 echo -e "${color} Adding the user \e[0m"
-useradd expense  &>>$log_file
-if [ $? -eq 0 ]; then
-  echo -e "\e[32m SUCCESS \e[0m"
-else
-  echo -e "\e[31m FAILURE \e[0m"  
+id expense &>>$log_file
+if [ $? -ne 0 ]; then
+
+ useradd expense  &>>$log_file
+ if [ $? -eq 0 ]; then
+   echo -e "\e[32m SUCCESS \e[0m"
+ else
+   echo -e "\e[31m FAILURE \e[0m"  
+ fi
+
 fi
 
 echo -e "${color} creating the directory \e[0m"
@@ -84,7 +89,7 @@ fi
 
 echo -e "${color} Extract the application content \e[0m"
 cd /app &>>$log_file
-unzip /tmp/backend.zip &>>log_file
+unzip /tmp/backend.zip &>>$log_file
 if [ $? -eq 0 ]; then
   echo -e "\e[32m SUCCESS \e[0m"
 else
