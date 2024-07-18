@@ -64,7 +64,7 @@ npm install &>>$log_file
 echo $?
 
 echo -e "${color} starting the backend services \e[0m"
-systemctl deamon-reload  &>>$log_file
+systemctl daemon-reload &>>$log_file  
 echo $?
 
 systemctl enable backend &>>log_file
