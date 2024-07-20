@@ -8,28 +8,18 @@ fi
 MY_ROOT_PASSWORD=$1
 
 echo -e "${color} disable nodejs \e[0m"
-dnf module disable nodejs -y  &>>$log_file
+dnf module disable nodejs -y &>>$log_file
 status_check
 
 
 echo -e "${color} enable nodejs \e[0m"
  
-dnf module enable nodejs:18 -y  &>>$log_file
+dnf module enable nodejs:18 -y &>>$log_file
 status_check
 
 echo -e "${color} install nodejs \e[0m"
 
-dnf install nodejs -y  &>>$log_file
-status_check
-
-
-echo -e "${color} install mysql \e[0m"
-dnf install mysql -y  &>>$log_file
-status_check
-
-echo -e "${color} create the user and password \e[0m"
-
-mysql -h 172.31.30.179 -uroot -pExpenseApp@1 < /app/schema/backend.sql  &>>$log_file
+dnf install nodejs -y &>>$log_file
 status_check
 
 echo -e "${color} copy the backend conf file \e[0m"
@@ -37,10 +27,10 @@ echo -e "${color} copy the backend conf file \e[0m"
 cp backend.service /etc/systemd/system/backend.service  &>>$log_file
 status_check
 
-echo -e "${color} Adding the user \e[0m"
+
 id expense &>>$log_file
 if [ $? -ne 0 ]; then
-
+ echo -e "${color} Adding the user \e[0m"
  useradd expense  &>>$log_file
  status_check
 
@@ -69,6 +59,15 @@ status_check
 echo -e "${color} changing the directory and install the dependency \e[0m"
 
 npm install &>>$log_file
+status_check
+
+echo -e "${color} install mysql \e[0m"
+dnf install mysql -y  &>>$log_file
+status_check
+
+echo -e "${color} create the user and password \e[0m"
+
+mysql -h 172.31.30.179 -uroot -p${MYSQL_ROOT_PASSWORD} < /app/schema/backend.sql  &>>$log_file
 status_check
 
 echo -e "${color} starting the backend services \e[0m"
